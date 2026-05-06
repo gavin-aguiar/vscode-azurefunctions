@@ -89,6 +89,8 @@ export function getRootFunctionsWorkerRuntime(language: string | undefined): str
             return 'python';
         case ProjectLanguage.PowerShell:
             return 'powershell';
+        case ProjectLanguage.Go:
+            return 'golang';
         case ProjectLanguage.Custom:
             return 'custom';
         default:

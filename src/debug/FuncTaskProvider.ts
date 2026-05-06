@@ -15,6 +15,7 @@ import { getFuncWatchProblemMatcher, getWorkspaceSetting } from '../vsCodeConfig
 import { getTasks } from '../vsCodeConfig/tasks';
 import { type BallerinaDebugProvider } from './BallerinaDebugProvider';
 import { type FuncDebugProviderBase } from './FuncDebugProviderBase';
+import { type GoDebugProvider } from './GoDebugProvider';
 import { type JavaDebugProvider } from './JavaDebugProvider';
 import { type NodeDebugProvider } from './NodeDebugProvider';
 import { type PowerShellDebugProvider } from './PowerShellDebugProvider';
@@ -26,13 +27,15 @@ export class FuncTaskProvider implements TaskProvider {
     private readonly _javaDebugProvider: JavaDebugProvider;
     private readonly _ballerinaDebugProvider: BallerinaDebugProvider;
     private readonly _powershellDebugProvider: PowerShellDebugProvider;
+    private readonly _goDebugProvider: GoDebugProvider;
 
-    constructor(nodeDebugProvider: NodeDebugProvider, pythonDebugProvider: PythonDebugProvider, javaDebugProvider: JavaDebugProvider, ballerinaDebugProvider: BallerinaDebugProvider, powershellDebugProvider: PowerShellDebugProvider) {
+    constructor(nodeDebugProvider: NodeDebugProvider, pythonDebugProvider: PythonDebugProvider, javaDebugProvider: JavaDebugProvider, ballerinaDebugProvider: BallerinaDebugProvider, powershellDebugProvider: PowerShellDebugProvider, goDebugProvider: GoDebugProvider) {
         this._nodeDebugProvider = nodeDebugProvider;
         this._pythonDebugProvider = pythonDebugProvider;
         this._javaDebugProvider = javaDebugProvider;
         this._ballerinaDebugProvider = ballerinaDebugProvider;
         this._powershellDebugProvider = powershellDebugProvider;
+        this._goDebugProvider = goDebugProvider;
     }
 
     public async provideTasks(_token?: CancellationToken | undefined): Promise<Task[]> {
@@ -167,6 +170,9 @@ export class FuncTaskProvider implements TaskProvider {
                 break;
             case ProjectLanguage.PowerShell:
                 debugProvider = this._powershellDebugProvider;
+                break;
+            case ProjectLanguage.Go:
+                debugProvider = this._goDebugProvider;
                 break;
             default:
                 return undefined;

@@ -37,6 +37,7 @@ export enum ProjectLanguage {
     Python = 'Python',
     TypeScript = 'TypeScript',
     Ballerina = 'Ballerina',
+    Go = 'Go',
     Custom = 'Custom',
     SelfHostedMCPServer = 'SelfHostedMCPServer'
 }
